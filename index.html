@@ -3,21 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bootstrap demo</title>
+    <title>U2-W3-D2</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-6 bg-info py-5">
-          <form id="form">
+    <div class="container mt-5">
+      <div id="row-display" class="row justify-content-center">
+        <div class="col-6 bg-info py-5 px-5">
+          <form id="form" class="rounded text-center">
             <div class="mb-3">
-              <label for="name" class="form-label">User's name</label>
+              <label for="name" class="form-label fw-bold fs-2"
+                >User's name</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -26,21 +29,43 @@
               />
             </div>
 
-            <button type="button" id="save-button" class="btn btn-success">
+            <button
+              type="button"
+              id="save-button"
+              class="btn btn-success w-25 me-2"
+            >
               Save
             </button>
-            <button type="button" id="delete-button" class="btn btn-danger">
+            <button
+              type="button"
+              id="delete-button"
+              class="btn btn-danger w-25"
+            >
               Delete
             </button>
           </form>
           <div id="profile-section">
-            <h1>User</h1>
-            <p id="show-user"></p>
+            <p
+              id="show-user"
+              class="fs-5 ps-2 border mt-3 rounded d-inline-block w-100"
+            ></p>
           </div>
         </div>
-        <div class="col-4 bg-info-subtle text-center">
-          <p id="minutes" class="mt-2"></p>
-          <p id="timer-display" class="fw-bold fs-1 mt-5"></p>
+        <div class="col-4 bg-info text-center px-4">
+          <div
+            id="timer-div"
+            class="mt-5 border border-3 border-success rounded-5 bg-white"
+          >
+            <p id="minutes" class="mt-2 fw-bold"></p>
+            <p id="timer-display" class="fw-bold fs-1 mt-5"></p>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-10 text-center bg-info py-4">
+          <button id="reset-button" class="btn btn-outline-dark">
+            RESET ALL
+          </button>
         </div>
       </div>
     </div>

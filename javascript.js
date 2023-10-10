@@ -5,17 +5,21 @@ const form = document.getElementById("form");
 const showUser = document.getElementById("show-user");
 const timerDisplay = document.getElementById("timer-display");
 const minutes = document.getElementById("minutes");
+const resetButton = document.getElementById("reset-button");
 
-// form.addEventListener("keydown" === "Enter", (e) => {
-//   e.preventDefault;
-//   save();
-// });
+form.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    save();
+  }
+});
 
 const save = () => {
-  localStorage.setItem("name", nameField.value);
-  console.log(nameField.value);
-  nameField.value = "";
-  renderUser();
+  if (nameField.value.length > 0) {
+    localStorage.setItem("name", nameField.value);
+    nameField.value = "";
+    renderUser();
+  }
 };
 
 const deleteUser = () => {
@@ -27,10 +31,21 @@ const renderUser = () => {
   showUser.innerText = localStorage.getItem("name");
 };
 
-renderUser();
+const resetAll = () => {
+  localStorage.clear();
+  sessionStorage.clear();
+  timerCounter = 0;
+  minutesCounter = 0;
+  timerDisplay.innerHTML = "0";
+  minutes.innerHTML = "0";
+  renderUser();
+  location.reload();
+};
 
 saveButton.addEventListener("click", save);
+
 deleteButton.addEventListener("click", deleteUser);
+resetButton.addEventListener("click", resetAll);
 
 const showTimer = () => {
   let timerCounter = parseInt(sessionStorage.getItem("timerCounter")) || 0;
@@ -40,15 +55,20 @@ const showTimer = () => {
     timerCounter++;
     sessionStorage.setItem("timerCounter", timerCounter);
 
-    if (timerCounter === 60) {
+    if (timerCounter >= 60) {
       timerCounter = 0;
       minutesCounter++;
       sessionStorage.setItem("minutes", minutesCounter);
     }
 
+    if (minutesCounter === 1) {
+      minutes.innerHTML = `${minutesCounter} minute`;
+    } else {
+      minutes.innerHTML = `${minutesCounter} minutes`;
+    }
     timerDisplay.innerHTML = `${timerCounter} seconds`;
-    minutes.innerHTML = `${minutesCounter} minutes`;
   }, 1000);
 };
 
 showTimer();
+renderUser();

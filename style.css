@@ -1,1 +1,11 @@
+#row-display {
+  height: 70vh !important;
+}
 
+#timer-div {
+  height: 15em;
+}
+
+#show-user {
+  height: 2em;
+}
