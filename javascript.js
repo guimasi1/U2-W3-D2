@@ -5,6 +5,7 @@ const form = document.getElementById("form");
 const showUser = document.getElementById("show-user");
 const timerDisplay = document.getElementById("timer-display");
 const minutes = document.getElementById("minutes");
+const hours = document.getElementById("hours");
 const resetButton = document.getElementById("reset-button");
 
 form.addEventListener("keydown", (e) => {
@@ -50,6 +51,7 @@ resetButton.addEventListener("click", resetAll);
 const showTimer = () => {
   let timerCounter = parseInt(sessionStorage.getItem("timerCounter")) || 0;
   let minutesCounter = parseInt(sessionStorage.getItem("minutes")) || 0;
+  let hoursCounter = parseInt(sessionStorage.getItem("hours")) || 0;
 
   setInterval(() => {
     timerCounter++;
@@ -61,12 +63,25 @@ const showTimer = () => {
       sessionStorage.setItem("minutes", minutesCounter);
     }
 
-    if (minutesCounter === 1) {
-      minutes.innerHTML = `${minutesCounter} minute`;
-    } else {
-      minutes.innerHTML = `${minutesCounter} minutes`;
+    // if (minutesCounter === 1) {
+    //   minutes.innerHTML = `${minutesCounter} minute`;
+    // } else {
+    //   minutes.innerHTML = `${minutesCounter} minutes`;
+    // }
+    timerDisplay.innerHTML = `${hoursCounter}  hours </br> ${minutesCounter} minutes </br>${timerCounter} seconds`;
+
+    if (minutesCounter >= 60) {
+      timerCounter = 0;
+      minutesCounter = 0;
+      hoursCounter++;
+      sessionStorage.setItem("hours", hoursCounter);
     }
-    timerDisplay.innerHTML = `${timerCounter} seconds`;
+
+    // if (hoursCounter === 1) {
+    //   hours.innerHTML = `${hoursCounter} hour`;
+    // } else {
+    //   hours.innerHTML = `${hoursCounter} hours`;
+    // }
   }, 1000);
 };
 
