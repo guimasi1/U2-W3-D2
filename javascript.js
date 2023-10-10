@@ -4,6 +4,7 @@ const deleteButton = document.getElementById("delete-button");
 const form = document.getElementById("form");
 const showUser = document.getElementById("show-user");
 const timerDisplay = document.getElementById("timer-display");
+const minutes = document.getElementById("minutes");
 
 // form.addEventListener("keydown" === "Enter", (e) => {
 //   e.preventDefault;
@@ -31,23 +32,23 @@ renderUser();
 saveButton.addEventListener("click", save);
 deleteButton.addEventListener("click", deleteUser);
 
-// localStorage.clear();
-
 const showTimer = () => {
-  if (sessionStorage.getItem("timerCounter")) {
-    let timerCounter = sessionStorage.getItem("timerCounter");
-    setInterval(() => {
-      timerCounter++;
-      sessionStorage.setItem("timerCounter", timerCounter);
+  let timerCounter = parseInt(sessionStorage.getItem("timerCounter")) || 0;
+  let minutesCounter = parseInt(sessionStorage.getItem("minutes")) || 0;
 
-      timerDisplay.innerHTML = sessionStorage.getItem("timerCounter");
-    }, 1000);
-  } else {
-    let timerCounter = 0;
+  setInterval(() => {
+    timerCounter++;
     sessionStorage.setItem("timerCounter", timerCounter);
-    timerDisplay.innerHTML = sessionStorage.getItem("timerCounter");
-  }
+
+    if (timerCounter === 60) {
+      timerCounter = 0;
+      minutesCounter++;
+      sessionStorage.setItem("minutes", minutesCounter);
+    }
+
+    timerDisplay.innerHTML = `${timerCounter} seconds`;
+    minutes.innerHTML = `${minutesCounter} minutes`;
+  }, 1000);
 };
 
-showTimer();
 showTimer();
