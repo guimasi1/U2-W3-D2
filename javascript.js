@@ -38,7 +38,6 @@ const resetAll = () => {
   timerCounter = 0;
   minutesCounter = 0;
   timerDisplay.innerHTML = "0";
-  minutes.innerHTML = "0";
   renderUser();
   location.reload();
 };
@@ -63,25 +62,13 @@ const showTimer = () => {
       sessionStorage.setItem("minutes", minutesCounter);
     }
 
-    // if (minutesCounter === 1) {
-    //   minutes.innerHTML = `${minutesCounter} minute`;
-    // } else {
-    //   minutes.innerHTML = `${minutesCounter} minutes`;
-    // }
-    timerDisplay.innerHTML = `${hoursCounter}  hours </br> ${minutesCounter} minutes </br>${timerCounter} seconds`;
-
     if (minutesCounter >= 60) {
       timerCounter = 0;
       minutesCounter = 0;
       hoursCounter++;
       sessionStorage.setItem("hours", hoursCounter);
     }
-
-    // if (hoursCounter === 1) {
-    //   hours.innerHTML = `${hoursCounter} hour`;
-    // } else {
-    //   hours.innerHTML = `${hoursCounter} hours`;
-    // }
+    timerDisplay.innerHTML = `${hoursCounter} hours </br> ${minutesCounter} minutes </br>${timerCounter} seconds`;
   }, 1000);
 };
 
